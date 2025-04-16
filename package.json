@@ -14,10 +14,37 @@
   "contributes": {
     "commands": [
       {
-        "command": "vscode-grails.helloWorld",
-        "title": "Hello World"
+        "command": "vscode-grails.openDomain",
+        "category": "Grails",
+        "title": "Open Domain Class"
       }
-    ]
+    ],
+    "menus": {
+        "editor/context": [
+            {
+                "command": "vscode-grails.openDomain",
+                "when": "resourceExtname == .groovy"
+            }
+        ],
+        "editor/title": [
+            {
+                "command": "vscode-grails.openDomain",
+                "when": "resourceExtname == .groovy"
+            }
+        ],
+        "editor/title/context": [
+            {
+                "command": "vscode-grails.openDomain",
+                "when": "resourceExtname == .groovy"
+            }
+        ],
+        "editor/title/run": [
+            {
+                "command": "vscode-grails.openDomain",
+                "when": "resourceExtname == .groovy"
+            }
+        ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
