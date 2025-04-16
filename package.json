@@ -23,25 +23,25 @@
         "editor/context": [
             {
                 "command": "vscode-grails.openDomain",
-                "when": "resourceExtname == .groovy"
+                "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$|.*Service\\.groovy$/)"
             }
         ],
         "editor/title": [
             {
                 "command": "vscode-grails.openDomain",
-                "when": "resourceExtname == .groovy"
+                "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$|.*Service\\.groovy$/)"
             }
         ],
         "editor/title/context": [
             {
                 "command": "vscode-grails.openDomain",
-                "when": "resourceExtname == .groovy"
+                "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$|.*Service\\.groovy$/)"
             }
         ],
         "editor/title/run": [
             {
                 "command": "vscode-grails.openDomain",
-                "when": "resourceExtname == .groovy"
+                "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$|.*Service\\.groovy$/)"
             }
         ]
     }
