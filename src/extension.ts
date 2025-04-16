@@ -138,9 +138,86 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
+    let gotoView = vscode.commands.registerCommand('vscode-grails.gotoView', async () => {
+        // 獲取當前編輯器
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return;
+        }
+
+        // 確保當前檔案是 Controller
+        const currentFile = editor.document.fileName;
+        if (!currentFile.endsWith('Controller.groovy')) {
+            vscode.window.showErrorMessage('這個命令只能在 Controller 檔案中使用');
+            return;
+        }
+
+        // 解析 Controller 名稱
+        const fileName = path.basename(currentFile);
+        const controllerName = fileName.replace('Controller.groovy', '');
+
+        // 找到專案根目錄
+        const workspaceFolder = vscode.workspace.getWorkspaceFolder(editor.document.uri);
+        if (!workspaceFolder) {
+            vscode.window.showErrorMessage('無法找到工作區資料夾');
+            return;
+        }
+
+        // 構建 views 目錄路徑
+        const viewsPath = path.join(workspaceFolder.uri.fsPath, 'grails-app', 'views', controllerName.toLowerCase());
+
+        // 檢查 views 目錄是否存在
+        if (!fs.existsSync(viewsPath)) {
+            const create = await vscode.window.showQuickPick(['是', '否'], {
+                placeHolder: `是否要建立 views 目錄 ${viewsPath}?`
+            });
+
+            if (create === '是') {
+                fs.mkdirSync(viewsPath, { recursive: true });
+            } else {
+                return;
+            }
+        }
+
+        // 讀取 views 目錄中的檔案
+        const files = fs.readdirSync(viewsPath).filter(file => file.endsWith('.gsp'));
+
+        if (files.length === 0) {
+            // 如果沒有 view 檔案，提供建立新檔案的選項
+            const createNew = await vscode.window.showQuickPick(['是', '否'], {
+                placeHolder: '沒有找到相關的 view 檔案。是否要建立新的 view 檔案？'
+            });
+
+            if (createNew === '是') {
+                const viewName = await vscode.window.showInputBox({
+                    placeHolder: '請輸入 view 名稱 (不需要 .gsp 副檔名)'
+                });
+
+                if (viewName) {
+                    const newViewPath = path.join(viewsPath, `${viewName}.gsp`);
+                    fs.writeFileSync(newViewPath, '');
+                    const doc = await vscode.workspace.openTextDocument(newViewPath);
+                    await vscode.window.showTextDocument(doc);
+                }
+            }
+            return;
+        }
+
+        // 如果有多個 view 檔案，讓使用者選擇
+        const selected = await vscode.window.showQuickPick(files, {
+            placeHolder: '選擇要開啟的 view 檔案'
+        });
+
+        if (selected) {
+            const doc = await vscode.workspace.openTextDocument(path.join(viewsPath, selected));
+            await vscode.window.showTextDocument(doc);
+        }
+    });
+
     context.subscriptions.push(gotoDomain);
     context.subscriptions.push(gotoController);
     context.subscriptions.push(gotoService);
+    context.subscriptions.push(gotoView);
 }
 
 // This method is called when your extension is deactivated

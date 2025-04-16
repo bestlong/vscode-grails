@@ -27,6 +27,11 @@
         "command": "vscode-grails.gotoService",
         "category": "Grails",
         "title": "Go To Service"
+      },
+      {
+        "command": "vscode-grails.gotoView",
+        "category": "Grails",
+        "title": "Go To View"
       }
     ],
     "menus": {
@@ -45,6 +50,11 @@
           "command": "vscode-grails.gotoService",
           "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Controller\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
           "group": "navigation"
+        },
+        {
+          "command": "vscode-grails.gotoView",
+          "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$/)",
+          "group": "navigation"
         }
       ],
       "editor/title": [
@@ -62,6 +72,11 @@
           "command": "vscode-grails.gotoService",
           "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Controller\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
           "group": "navigation"
+        },
+        {
+          "command": "vscode-grails.gotoView",
+          "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$/)",
+          "group": "navigation"
         }
       ],
       "editor/title/context": [
@@ -78,6 +93,11 @@
         {
           "command": "vscode-grails.gotoService",
           "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Controller\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
+          "group": "navigation"
+        },
+        {
+          "command": "vscode-grails.gotoView",
+          "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$/)",
           "group": "navigation"
         }
       ]
