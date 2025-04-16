@@ -14,69 +14,69 @@
   "contributes": {
     "commands": [
       {
-        "command": "vscode-grails.openDomain",
+        "command": "vscode-grails.gotoDomain",
         "category": "Grails",
-        "title": "Open Domain"
+        "title": "Go To Domain"
       },
       {
-        "command": "vscode-grails.openController",
+        "command": "vscode-grails.gotoController",
         "category": "Grails",
-        "title": "Open Controller"
+        "title": "Go To Controller"
       },
       {
-        "command": "vscode-grails.openService",
+        "command": "vscode-grails.gotoService",
         "category": "Grails",
-        "title": "Open Service"
+        "title": "Go To Service"
       }
     ],
     "menus": {
         "editor/context": [
             {
-                "command": "vscode-grails.openController",
+                "command": "vscode-grails.gotoController",
                 "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Service\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
                 "group": "navigation"
             },
             {
-                "command": "vscode-grails.openDomain",
+                "command": "vscode-grails.gotoDomain",
                 "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$|.*Service\\.groovy$/)",
                 "group": "navigation"
             },
             {
-                "command": "vscode-grails.openService",
+                "command": "vscode-grails.gotoService",
                 "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Controller\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
                 "group": "navigation"
             }
         ],
         "editor/title": [
             {
-                "command": "vscode-grails.openController",
+                "command": "vscode-grails.gotoController",
                 "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Service\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
                 "group": "navigation"
             },
             {
-                "command": "vscode-grails.openDomain",
+                "command": "vscode-grails.gotoDomain",
                 "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$|.*Service\\.groovy$/)",
                 "group": "navigation"
             },
             {
-                "command": "vscode-grails.openService",
+                "command": "vscode-grails.gotoService",
                 "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Controller\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
                 "group": "navigation"
             }
         ],
         "editor/title/context": [
             {
-                "command": "vscode-grails.openController",
+                "command": "vscode-grails.gotoController",
                 "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Service\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
                 "group": "navigation"
             },
             {
-                "command": "vscode-grails.openDomain",
+                "command": "vscode-grails.gotoDomain",
                 "when": "resourceExtname == .groovy && (resourceFilename =~ /.*Controller\\.groovy$|.*Service\\.groovy$/)",
                 "group": "navigation"
             },
             {
-                "command": "vscode-grails.openService",
+                "command": "vscode-grails.gotoService",
                 "when": "resourceExtname == .groovy && ( (resourceFilename =~ /.*Controller\\.groovy$/) || (resourcePath =~ /.*\\/domain\\/.*?\\/.*\\.groovy$/) )",
                 "group": "navigation"
             }

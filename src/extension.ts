@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
         return null;
     };
 
-    let openDomain = vscode.commands.registerCommand('vscode-grails.openDomain', async () => {
+    let gotoDomain = vscode.commands.registerCommand('vscode-grails.gotoDomain', async () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {
             return;
@@ -78,7 +78,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    let openController = vscode.commands.registerCommand('vscode-grails.openController', async () => {
+    let gotoController = vscode.commands.registerCommand('vscode-grails.gotoController', async () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {
             return;
@@ -111,7 +111,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    let openService = vscode.commands.registerCommand('vscode-grails.openService', async () => {
+    let gotoService = vscode.commands.registerCommand('vscode-grails.gotoService', async () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {
             return;
@@ -138,9 +138,9 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    context.subscriptions.push(openDomain);
-    context.subscriptions.push(openController);
-    context.subscriptions.push(openService);
+    context.subscriptions.push(gotoDomain);
+    context.subscriptions.push(gotoController);
+    context.subscriptions.push(gotoService);
 }
 
 // This method is called when your extension is deactivated
