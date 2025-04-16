@@ -58,7 +58,9 @@ export function activate(context: vscode.ExtensionContext) {
                 if (stat.isDirectory()) {
                     // 遞迴搜尋子目錄
                     const found = findDomainFile(fullPath, targetFileName);
-                    if (found) return found;
+                    if (found) {
+                        return found;
+                    }
                 } else if (file === targetFileName) {
                     return fullPath;
                 }
