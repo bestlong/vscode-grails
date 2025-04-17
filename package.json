@@ -29,22 +29,38 @@
       {
         "command": "vscode-grails.gotoDomain",
         "category": "Grails",
-        "title": "Go To Domain"
+        "title": "Go To Domain",
+        "icon": {
+          "light": "images/grails-domain.svg",
+          "dark": "images/grails-domain.svg"
+        }
       },
       {
         "command": "vscode-grails.gotoController",
         "category": "Grails",
-        "title": "Go To Controller"
+        "title": "Go To Controller",
+        "icon": {
+          "light": "images/grails-controller.svg",
+          "dark": "images/grails-controller.svg"
+        }
       },
       {
         "command": "vscode-grails.gotoService",
         "category": "Grails",
-        "title": "Go To Service"
+        "title": "Go To Service",
+        "icon": {
+          "light": "images/grails-service.svg",
+          "dark": "images/grails-service.svg"
+        }
       },
       {
         "command": "vscode-grails.gotoView",
         "category": "Grails",
-        "title": "Go To View"
+        "title": "Go To View",
+        "icon": {
+          "light": "images/grails-view.svg",
+          "dark": "images/grails-view.svg"
+        }
       }
     ],
     "menus": {

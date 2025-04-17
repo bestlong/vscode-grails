@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <!-- 圓形背景 -->
+    <circle cx="8" cy="8" r="7.5" fill="#FEB672" stroke="#666666" stroke-width="0.5"/>
+    
+    <!-- 字母 "C" -->
+    <path d="M11 5.5
+             q0 -1 -1.5 -1
+             h-2
+             q-1.5 0 -1.5 1
+             v5
+             q0 1 1.5 1
+             h2
+             q1.5 0 1.5 -1
+             v-1
+             h-1
+             v0.5
+             q0 0.5 -0.75 0.5
+             h-1.5
+             q-0.75 0 -0.75 -0.5
+             v-4
+             q0 -0.5 0.75 -0.5
+             h1.5
+             q0.75 0 0.75 0.5
+             v0.5
+             h1
+             v-1" 
+          fill="#2A2A2A"/>
+</svg>

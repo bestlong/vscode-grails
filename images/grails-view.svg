@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <!-- 圓形背景 -->
+    <circle cx="8" cy="8" r="7.5" fill="#FEB672" stroke="#666666" stroke-width="0.5"/>
+    
+    <!-- 字母 "V" -->
+    <path d="M5 4.5
+             l3 7
+             l3 -7
+             h-1
+             l-2 5
+             l-2 -5
+             z" 
+          fill="#2A2A2A"/>
+</svg>

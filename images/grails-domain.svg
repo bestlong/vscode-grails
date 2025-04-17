@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <!-- 圓形背景 -->
+    <circle cx="8" cy="8" r="7.5" fill="#FEB672" stroke="#666666" stroke-width="0.5"/>
+    
+    <!-- 字母 "D" -->
+    <path d="M5 4.5
+             h4 
+             q2.5 0 2.5 3.5 
+             q0 3.5 -2.5 3.5 
+             h-4 
+             v-7
+             M6 5.5
+             v5
+             h2.5
+             q1.5 0 1.5 -2.5
+             q0 -2.5 -1.5 -2.5
+             h-2.5" 
+          fill="#2A2A2A"/>
+</svg>
