@@ -20,7 +20,9 @@
     "type": "git",
     "url": "https://github.com/bestlong/vscode-grails"
   },
-  "activationEvents": [],
+  "activationEvents": [
+    "workspaceContains:grails-app"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
