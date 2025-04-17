@@ -97,11 +97,43 @@ export function activate(context: vscode.ExtensionContext) {
         // 取得 Controller 類別名稱
         let controllerClassName;
         if (fileName.endsWith('.gsp')) {
-            // 如果是 .gsp 檔案，從路徑取得 controller 名稱
+            // 如果是 .gsp 檔案，從路徑取得 controller 名稱和 view 名稱
             const viewsPath = path.join(workspaceFolder.uri.fsPath, 'grails-app', 'views');
             const relativePath = path.relative(viewsPath, path.dirname(currentFilePath));
             const controllerName = relativePath.split(path.sep)[0];
             controllerClassName = `${controllerName.charAt(0).toUpperCase() + controllerName.slice(1)}Controller.groovy`;
+
+            // 取得不含副檔名的當前檔案名稱作為方法名稱
+            const methodName = path.basename(currentFilePath, '.gsp');
+
+            // 找到對應的 Controller 檔案
+            const controllerFile = findDomainFile(controllerBasePath, controllerClassName);
+
+            if (controllerFile) {
+                const document = await vscode.workspace.openTextDocument(controllerFile);
+                await vscode.window.showTextDocument(document);
+
+                // 找到對應的方法位置
+                const text = document.getText();
+                const methodRegex = new RegExp(`def\\s+${methodName}\\s*\\(`);
+                const match = text.match(methodRegex);
+
+                if (match) {
+                    // 計算方法在文件中的位置
+                    const position = document.positionAt(match.index!);
+
+                    // 移動編輯器到對應的方法
+                    const editor = await vscode.window.showTextDocument(document);
+                    editor.selection = new vscode.Selection(position, position);
+                    editor.revealRange(
+                        new vscode.Range(position, position),
+                        vscode.TextEditorRevealType.InCenter
+                    );
+                }
+            } else {
+                vscode.window.showInformationMessage(`找不到對應的 Controller 類別: ${controllerClassName}`);
+            }
+            return;
         } else {
             controllerClassName = fileName.replace('.groovy', 'Controller.groovy');
             if (fileName.endsWith('Service.groovy')) {
