@@ -95,9 +95,18 @@ export function activate(context: vscode.ExtensionContext) {
         const fileName = path.basename(currentFilePath);
 
         // 取得 Controller 類別名稱
-        let controllerClassName = fileName.replace('.groovy', 'Controller.groovy');
-        if (fileName.endsWith('Service.groovy')) {
-            controllerClassName = fileName.replace('Service.groovy', 'Controller.groovy');
+        let controllerClassName;
+        if (fileName.endsWith('.gsp')) {
+            // 如果是 .gsp 檔案，從路徑取得 controller 名稱
+            const viewsPath = path.join(workspaceFolder.uri.fsPath, 'grails-app', 'views');
+            const relativePath = path.relative(viewsPath, path.dirname(currentFilePath));
+            const controllerName = relativePath.split(path.sep)[0];
+            controllerClassName = `${controllerName.charAt(0).toUpperCase() + controllerName.slice(1)}Controller.groovy`;
+        } else {
+            controllerClassName = fileName.replace('.groovy', 'Controller.groovy');
+            if (fileName.endsWith('Service.groovy')) {
+                controllerClassName = fileName.replace('Service.groovy', 'Controller.groovy');
+            }
         }
 
         // 使用現有的 findDomainFile 函數邏輯來尋找檔案
