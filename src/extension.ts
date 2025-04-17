@@ -204,6 +204,41 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
+        // 從游標位置取得當前方法名稱
+        const document = editor.document;
+        const position = editor.selection.active;
+        const text = document.getText();
+
+        // 尋找目前游標位置的方法名稱
+        const methodRegex = /def\s+(\w+)\s*\(/g;
+        let currentMethod = null;
+        let match;
+
+        while ((match = methodRegex.exec(text)) !== null) {
+            const methodStartPos = document.positionAt(match.index);
+            const methodEndPos = document.positionAt(match.index + match[0].length);
+
+            // 建立方法的範圍
+            const methodRange = new vscode.Range(methodStartPos, methodEndPos);
+
+            // 尋找方法的結束位置 (找到下一個 def 或檔案結尾)
+            let nextMatch = methodRegex.exec(text);
+            let methodBlockEndPos;
+            if (nextMatch) {
+                methodBlockEndPos = document.positionAt(nextMatch.index);
+                methodRegex.lastIndex = match.index + match[0].length; // 重設搜尋位置
+            } else {
+                methodBlockEndPos = document.positionAt(text.length);
+            }
+
+            // 檢查游標是否在這個方法的範圍內
+            const methodBlockRange = new vscode.Range(methodStartPos, methodBlockEndPos);
+            if (methodBlockRange.contains(position)) {
+                currentMethod = match[1]; // 取得方法名稱
+                break;
+            }
+        }
+
         // 構建 views 目錄路徑
         const viewsPath = path.join(workspaceFolder.uri.fsPath, 'grails-app', 'views', controllerName.toLowerCase());
 
@@ -223,15 +258,29 @@ export function activate(context: vscode.ExtensionContext) {
         // 讀取 views 目錄中的檔案
         const files = fs.readdirSync(viewsPath).filter(file => file.endsWith('.gsp'));
 
+        // 如果有找到當前方法名稱，優先尋找對應的 view 檔案
+        if (currentMethod) {
+            const matchingView = files.find(file => file === `${currentMethod}.gsp`);
+            if (matchingView) {
+                const doc = await vscode.workspace.openTextDocument(path.join(viewsPath, matchingView));
+                await vscode.window.showTextDocument(doc);
+                return;
+            }
+        }
+
         if (files.length === 0) {
             // 如果沒有 view 檔案，提供建立新檔案的選項
             const createNew = await vscode.window.showQuickPick(['是', '否'], {
-                placeHolder: '沒有找到相關的 view 檔案。是否要建立新的 view 檔案？'
+                placeHolder: currentMethod
+                    ? `沒有找到對應方法 "${currentMethod}" 的 view 檔案。是否要建立新的 view 檔案？`
+                    : '沒有找到相關的 view 檔案。是否要建立新的 view 檔案？'
             });
 
             if (createNew === '是') {
+                const defaultName = currentMethod || '';
                 const viewName = await vscode.window.showInputBox({
-                    placeHolder: '請輸入 view 名稱 (不需要 .gsp 副檔名)'
+                    placeHolder: '請輸入 view 名稱 (不需要 .gsp 副檔名)',
+                    value: defaultName
                 });
 
                 if (viewName) {
@@ -246,7 +295,9 @@ export function activate(context: vscode.ExtensionContext) {
 
         // 如果有多個 view 檔案，讓使用者選擇
         const selected = await vscode.window.showQuickPick(files, {
-            placeHolder: '選擇要開啟的 view 檔案'
+            placeHolder: currentMethod
+                ? `找不到方法 "${currentMethod}" 對應的 view，請選擇要開啟的 view 檔案`
+                : '選擇要開啟的 view 檔案'
         });
 
         if (selected) {
