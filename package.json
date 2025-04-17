@@ -136,7 +136,7 @@
       "languageName": "Traditional Chinese",
       "localizedLanguageName": "繁體中文",
       "translations": [{
-        "id": "vscode-grails",
+        "id": "bestlong.vscode-grails",
         "path": "./i18n/zh-tw/messages.json"
       }]
     }]
