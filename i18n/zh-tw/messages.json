@@ -1,0 +1,13 @@
+{
+  "grails.notFound.domain": "找不到對應的 Domain 類別：{0}",
+  "grails.notFound.controller": "找不到對應的 Controller 類別：{0}",
+  "grails.notFound.service": "找不到對應的 Service 類別：{0}",
+  "grails.error.controllerOnly": "這個命令只能在 Controller 檔案中使用",
+  "grails.error.noWorkspace": "無法找到工作區資料夾",
+  "grails.prompt.createViewDir": "是否要建立 views 目錄 {0}?",
+  "grails.prompt.createViewFile": "沒有找到對應方法 \"{0}\" 的 view 檔案。是否要建立新的 view 檔案？",
+  "grails.prompt.noViewFile": "沒有找到相關的 view 檔案。是否要建立新的 view 檔案？",
+  "grails.prompt.selectView": "選擇要開啟的 view 檔案",
+  "grails.prompt.enterViewName": "請輸入 view 名稱 (不需要 .gsp 副檔名)",
+  "grails.prompt.methodViewNotFound": "找不到方法 \"{0}\" 對應的 view，請選擇要開啟的 view 檔案"
+}

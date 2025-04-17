@@ -130,7 +130,16 @@
           "group": "navigation"
         }
       ]
-    }
+    },
+    "localizations": [{
+      "languageId": "zh-tw",
+      "languageName": "Traditional Chinese",
+      "localizedLanguageName": "繁體中文",
+      "translations": [{
+        "id": "vscode-grails",
+        "path": "./i18n/zh-tw/messages.json"
+      }]
+    }]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

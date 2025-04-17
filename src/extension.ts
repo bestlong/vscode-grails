@@ -4,6 +4,26 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 
+// 新增載入語系檔案的功能
+function loadMessages(locale: string): any {
+    const messagePath = path.join(__dirname, '..', 'i18n', locale, 'messages.json');
+    try {
+        return JSON.parse(fs.readFileSync(messagePath, 'utf8'));
+    } catch (err) {
+        return JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'i18n', 'en', 'messages.json'), 'utf8'));
+    }
+}
+
+// 取得當前語系的訊息
+function getMessage(key: string, ...args: string[]): string {
+    const messages = loadMessages(vscode.env.language);
+    let message = messages[key] || key;
+    args.forEach((arg, index) => {
+        message = message.replace(`{${index}}`, arg);
+    });
+    return message;
+}
+
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -74,7 +94,7 @@ export function activate(context: vscode.ExtensionContext) {
             const document = await vscode.workspace.openTextDocument(domainFile);
             await vscode.window.showTextDocument(document);
         } else {
-            vscode.window.showInformationMessage(`找不到對應的 Domain 類別: ${domainClassName}`);
+            vscode.window.showInformationMessage(getMessage('grails.notFound.domain', domainClassName));
         }
     });
 
@@ -131,7 +151,7 @@ export function activate(context: vscode.ExtensionContext) {
                     );
                 }
             } else {
-                vscode.window.showInformationMessage(`找不到對應的 Controller 類別: ${controllerClassName}`);
+                vscode.window.showInformationMessage(getMessage('grails.notFound.controller', controllerClassName));
             }
             return;
         } else {
@@ -148,7 +168,7 @@ export function activate(context: vscode.ExtensionContext) {
             const document = await vscode.workspace.openTextDocument(controllerFile);
             await vscode.window.showTextDocument(document);
         } else {
-            vscode.window.showInformationMessage(`找不到對應的 Controller 類別: ${controllerClassName}`);
+            vscode.window.showInformationMessage(getMessage('grails.notFound.controller', controllerClassName));
         }
     });
 
@@ -175,7 +195,7 @@ export function activate(context: vscode.ExtensionContext) {
             const document = await vscode.workspace.openTextDocument(serviceFile);
             await vscode.window.showTextDocument(document);
         } else {
-            vscode.window.showInformationMessage(`找不到對應的 Service 類別: ${serviceClassName}`);
+            vscode.window.showInformationMessage(getMessage('grails.notFound.service', serviceClassName));
         }
     });
 
@@ -189,7 +209,7 @@ export function activate(context: vscode.ExtensionContext) {
         // 確保當前檔案是 Controller
         const currentFile = editor.document.fileName;
         if (!currentFile.endsWith('Controller.groovy')) {
-            vscode.window.showErrorMessage('這個命令只能在 Controller 檔案中使用');
+            vscode.window.showErrorMessage(getMessage('grails.error.notController'));
             return;
         }
 
@@ -200,7 +220,7 @@ export function activate(context: vscode.ExtensionContext) {
         // 找到專案根目錄
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(editor.document.uri);
         if (!workspaceFolder) {
-            vscode.window.showErrorMessage('無法找到工作區資料夾');
+            vscode.window.showErrorMessage(getMessage('grails.error.noWorkspaceFolder'));
             return;
         }
 
@@ -245,7 +265,7 @@ export function activate(context: vscode.ExtensionContext) {
         // 檢查 views 目錄是否存在
         if (!fs.existsSync(viewsPath)) {
             const create = await vscode.window.showQuickPick(['是', '否'], {
-                placeHolder: `是否要建立 views 目錄 ${viewsPath}?`
+                placeHolder: getMessage('grails.createViewsDirectory', viewsPath)
             });
 
             if (create === '是') {
@@ -272,14 +292,14 @@ export function activate(context: vscode.ExtensionContext) {
             // 如果沒有 view 檔案，提供建立新檔案的選項
             const createNew = await vscode.window.showQuickPick(['是', '否'], {
                 placeHolder: currentMethod
-                    ? `沒有找到對應方法 "${currentMethod}" 的 view 檔案。是否要建立新的 view 檔案？`
-                    : '沒有找到相關的 view 檔案。是否要建立新的 view 檔案？'
+                    ? getMessage('grails.noViewForMethod', currentMethod)
+                    : getMessage('grails.noViews')
             });
 
             if (createNew === '是') {
                 const defaultName = currentMethod || '';
                 const viewName = await vscode.window.showInputBox({
-                    placeHolder: '請輸入 view 名稱 (不需要 .gsp 副檔名)',
+                    placeHolder: getMessage('grails.enterViewName'),
                     value: defaultName
                 });
 
@@ -296,8 +316,8 @@ export function activate(context: vscode.ExtensionContext) {
         // 如果有多個 view 檔案，讓使用者選擇
         const selected = await vscode.window.showQuickPick(files, {
             placeHolder: currentMethod
-                ? `找不到方法 "${currentMethod}" 對應的 view，請選擇要開啟的 view 檔案`
-                : '選擇要開啟的 view 檔案'
+                ? getMessage('grails.selectViewForMethod', currentMethod)
+                : getMessage('grails.selectView')
         });
 
         if (selected) {
