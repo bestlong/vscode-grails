@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-    <!-- 圓形背景 -->
-    <circle cx="8" cy="8" r="7.5" fill="#FEB672" stroke="#666666" stroke-width="0.5"/>
-    
-    <!-- 字母 "V" -->
-    <path d="M5 4.5
-             l3 7
-             l3 -7
-             h-1
-             l-2 5
-             l-2 -5
-             z" 
-          fill="#2A2A2A"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"></rect><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0%" stop-color="#ff9900"></stop><stop offset="100%" stop-color="#ff9900"></stop></linearGradient></defs><g><g fill="#000000" transform="matrix(12.659340659340659,0,0,12.659340659340659,16.32043168734718,190.007288644602)" stroke="#dccf90" stroke-width="0"><path d="M3.77-14.22L6.59-3.87L9.42-14.22L13.25-14.22L8.47 0L4.72 0L-0.03-14.22L3.77-14.22Z"></path></g></g></svg>
