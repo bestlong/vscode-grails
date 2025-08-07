@@ -4,6 +4,7 @@ All notable changes to the "vscode-grails" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [0.5.1] - 2025-08-07
 
-- Initial release
+### Improved
+- New icons
