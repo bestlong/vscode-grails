@@ -1,4 +1,6 @@
 {
+  "grails.yes": "Yes",
+  "grails.no": "No",
   "grails.notFound.domain": "Could not find Domain class: {0}",
   "grails.notFound.controller": "Could not find Controller class: {0}",
   "grails.notFound.service": "Could not find Service class: {0}",

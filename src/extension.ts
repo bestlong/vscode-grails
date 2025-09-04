@@ -254,11 +254,14 @@ export function activate(context: vscode.ExtensionContext) {
 
         // 檢查 views 目錄是否存在
         if (!fs.existsSync(viewsPath)) {
-            const create = await vscode.window.showQuickPick(['是', '否'], {
+            const create = await vscode.window.showQuickPick([
+                getMessage('grails.yes'),
+                getMessage('grails.no')
+            ], {
                 placeHolder: getMessage('grails.createViewsDirectory', viewsPath)
             });
 
-            if (create === '是') {
+            if (create === getMessage('grails.yes')) {
                 fs.mkdirSync(viewsPath, { recursive: true });
             } else {
                 return;
@@ -280,13 +283,16 @@ export function activate(context: vscode.ExtensionContext) {
 
         if (files.length === 0) {
             // 如果沒有 view 檔案，提供建立新檔案的選項
-            const createNew = await vscode.window.showQuickPick(['是', '否'], {
+            const createNew = await vscode.window.showQuickPick([
+                getMessage('grails.yes'),
+                getMessage('grails.no')
+            ], {
                 placeHolder: currentMethod
                     ? getMessage('grails.noViewForMethod', currentMethod)
                     : getMessage('grails.noViews')
             });
 
-            if (createNew === '是') {
+            if (createNew === getMessage('grails.yes')) {
                 const defaultName = currentMethod || '';
                 const viewName = await vscode.window.showInputBox({
                     placeHolder: getMessage('grails.enterViewName'),

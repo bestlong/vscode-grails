@@ -1,4 +1,6 @@
 {
+  "grails.yes": "是",
+  "grails.no": "否",
   "grails.notFound.domain": "找不到對應的 Domain 類別：{0}",
   "grails.notFound.controller": "找不到對應的 Controller 類別：{0}",
   "grails.notFound.service": "找不到對應的 Service 類別：{0}",
