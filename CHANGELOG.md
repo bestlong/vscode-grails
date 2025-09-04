@@ -15,3 +15,9 @@ Check [Keep a Changelog](https://keepachangelog.com/) for recommendations on how
 
 - Controller to View.
 - Checked and ensured all getMessage i18n keys have corresponding translations (en/zh-tw).
+
+## [0.6.0] - 2025-09-04
+
+### Fixed
+
+- showQuickPick message i18n.
