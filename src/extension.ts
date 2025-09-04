@@ -249,7 +249,8 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         // 構建 views 目錄路徑
-        const viewsPath = path.join(workspaceFolder.uri.fsPath, 'grails-app', 'views', controllerName.toLowerCase());
+        const viewsDirName = controllerName.charAt(0).toLowerCase() + controllerName.slice(1);
+        const viewsPath = path.join(workspaceFolder.uri.fsPath, 'grails-app', 'views', viewsDirName);
 
         // 檢查 views 目錄是否存在
         if (!fs.existsSync(viewsPath)) {
