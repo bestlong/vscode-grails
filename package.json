@@ -2,7 +2,7 @@
   "name": "vscode-grails",
   "displayName": "Grails extension for VSCode",
   "description": "Grails is a web application framework that uses the Groovy programming language. This extension provides Grails support for Visual Studio Code.",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "engines": {
     "vscode": "^1.99.0"
   },
@@ -131,15 +131,19 @@
         }
       ]
     },
-    "localizations": [{
-      "languageId": "zh-tw",
-      "languageName": "Traditional Chinese",
-      "localizedLanguageName": "繁體中文",
-      "translations": [{
-        "id": "bestlong.vscode-grails",
-        "path": "./i18n/zh-tw/messages.json"
-      }]
-    }]
+    "localizations": [
+      {
+        "languageId": "zh-tw",
+        "languageName": "Traditional Chinese",
+        "localizedLanguageName": "繁體中文",
+        "translations": [
+          {
+            "id": "bestlong.vscode-grails",
+            "path": "./i18n/zh-tw/messages.json"
+          }
+        ]
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
